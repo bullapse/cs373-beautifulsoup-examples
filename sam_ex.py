@@ -2,8 +2,6 @@ import requests
 from bs4 import BeautifulSoup
 
 def main():
-    searching = True
-    while(searching):
         # Ask the user to search for a company's financial info
         sym = input("Please enter a company symbol:").upper()
         url = 'http://finance.yahoo.com/quote/' + sym + '?p=' + sym
@@ -22,11 +20,9 @@ def main():
             print("Couldn't find any quote info for the company " + sym)
         else:
             # Go through all the table data in the quote summary and print the data
-            data = quote_summary.find('table')
-            for x in data.strings:
+            for x in quote_summary.strings:
                 print(x)
-        # Allow user to search for another company
-        searching = input("Would you like to search for another company? (Y/N)").upper() == 'Y'
+
 
 if __name__ == '__main__':
     main()
